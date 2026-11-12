@@ -50,7 +50,7 @@ header.site .wrap {
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;                 /* space between the logo and the text */
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -58,15 +58,14 @@ header.site .wrap {
   font-size: 1rem;
 }
 .brand:hover { text-decoration: none; color: #fff; }
+
+/* Logo image next to the name (no box, no border) */
 .brand .logo {
-  width: 38px; height: 38px;
-  border-radius: 10px;
-  background: transparent;
-  border: 2px solid var(--light-blue);
-  color: var(--light-blue);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.25rem; letter-spacing: 0;
+  display: block;
+  height: 44px;              /* logo size; try 38–56px */
+  width: auto;               /* keeps proportions, no stretching */
 }
+
 nav ul {
   list-style: none;
   margin: 0;
@@ -416,3 +415,236 @@ footer.site a { color: var(--light-blue); }
   cursor: pointer;
 }
 .slider .dots button.on { background: var(--orange); }
+
+/* Member headshots: crops any photo to fill the circle */
+.person img.photo { display: block; object-fit: cover; object-position: center 25%; }
+
+/* ---------- Team grid: 3 per row, clickable cards ---------- */
+.people {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px 32px;
+}
+@media (max-width: 900px) { .people { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .people { grid-template-columns: 1fr; } }
+
+a.person { display: block; color: inherit; text-decoration: none; padding: 8px; border-radius: 12px; }
+a.person:hover { text-decoration: none; }
+.person .photo { width: 190px; height: 190px; }
+a.person .photo {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 0 0 4px #fff, 0 0 0 5px var(--line);
+}
+a.person:hover .photo,
+a.person:focus-visible .photo {
+  transform: scale(1.07);
+  box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--orange), 0 14px 26px -10px rgba(0,0,0,0.35);
+}
+a.person h3 { transition: color 0.2s; }
+a.person:hover h3 { color: var(--orange); }
+
+/* ---------- Individual profile pages (team/*.html) ----------
+   Photo strip across the top, then headshot + details on a light grey band. */
+.profile-page { background: #f4f4f4; }
+
+.photo-strip {
+  display: flex;
+  height: clamp(220px, 28vw, 440px);
+  background: #fff;
+}
+.photo-strip > * {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-strip .ph {
+  display: flex; align-items: center; justify-content: center;
+  background: #e3e8ed;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-right: 1px solid #fff;
+}
+.photo-strip .ph:last-child { border-right: 0; }
+@media (max-width: 700px) {
+  .photo-strip { flex-wrap: wrap; height: auto; }
+  .photo-strip > * { flex: 1 1 50%; height: 180px; }
+}
+
+.profile-body { padding: 48px 0 120px; }
+.profile-body .back {
+  display: inline-block;
+  margin-bottom: 56px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.profile-body .back:hover { color: var(--orange); text-decoration: none; }
+
+.profile {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+@media (max-width: 820px) { .profile { grid-template-columns: 1fr; } }
+
+.profile-side { text-align: center; }
+.headshot {
+  display: block;
+  width: 260px; height: 260px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 25%;
+  background: #e3e8ed;
+}
+.headshot.ph { display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.email-btn {
+  display: inline-block;
+  padding: 9px 40px;
+  border: 1.5px solid var(--navy);
+  border-radius: 999px;
+  color: var(--navy);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  transition: background 0.15s, color 0.15s;
+}
+.email-btn:hover { background: var(--navy); color: #fff; text-decoration: none; }
+
+.profile-text h1 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+.profile-text .role { margin: 0 0 18px; color: var(--orange); font-weight: 600; font-size: 1.05rem; }
+.profile-text .degree { margin: 0 0 8px; font-size: 1.15rem; color: #444; }
+.profile-text .degree span { color: var(--blue); font-weight: 600; }
+
+.profile-text .divider {
+  position: relative;
+  width: 180px;
+  height: 1px;
+  margin: 28px 0 30px 22px;
+  background: #9a9aa2;
+}
+.profile-text .divider::before {
+  content: "";
+  position: absolute;
+  left: -22px; top: -6px;
+  width: 2px; height: 12px;
+  background: var(--orange);
+}
+
+.profile-text .bio {
+  margin: 0 0 28px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #3a3a40;
+}
+.profile-text .bio.todo { color: #a1a1a6; }
+.profile-text .links { display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 0; }
+.profile-text .links a { color: var(--blue); font-weight: 600; }
+.profile-text .links a:hover { color: var(--orange); text-decoration: none; }
+
+/* Placeholder text still to be filled in — shown in grey italics */
+.todo { color: #9a9aa5; font-style: italic; }
+
+/* ---------- Publications page ---------- */
+.pub-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 6px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+}
+.pub-topics button,
+.pub-years button {
+  font: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: #444;
+}
+.pub-topics button {
+  padding: 12px 14px 11px;
+  font-size: 1.02rem;
+  border-top: 3px solid transparent;
+  margin-top: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.pub-topics button:hover { color: var(--orange-light); border-top-color: var(--orange-light); }
+.pub-topics button.on { color: var(--orange); border-top-color: var(--orange); }
+
+.pub-years { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.pub-years button {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+}
+.pub-years button:hover { color: var(--orange); }
+.pub-years button.on { border-color: var(--orange); color: var(--orange); font-weight: 600; }
+
+.pub-search input {
+  width: min(380px, 100%);
+  padding: 9px 14px;
+  font: inherit;
+  font-size: 0.95rem;
+  border: 1px solid #cfcfd6;
+  background: #f4f4f6;
+  border-radius: 2px;
+}
+.pub-search input:focus { outline: 2px solid var(--orange-light); background: #fff; }
+
+.pub-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin: 36px 0 8px; }
+.content .pub-head h2 { margin: 0; border: 0; padding: 0; font-weight: 600; font-size: 1.8rem; }
+.pub-count { color: var(--muted); font-size: 0.95rem; }
+
+.pub-list { border-left: 3px solid var(--orange); padding-left: 22px; }
+.pub-year h3 { margin: 26px 0 6px; font-size: 1.25rem; color: var(--navy); }
+.pub-year:first-child h3 { margin-top: 10px; }
+.pub-year ul { list-style: none; margin: 0; padding: 0; }
+.pub { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.pub:last-child { border-bottom: 0; }
+.pub-toggle {
+  display: flex; align-items: flex-start; gap: 12px;
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  background: none; border: 0; cursor: pointer;
+  color: var(--ink);
+}
+.pub-title { font-weight: 700; font-size: 1.08rem; line-height: 1.4; }
+.pub-toggle:hover .pub-title { color: var(--orange); }
+.chev {
+  flex: 0 0 auto;
+  width: 9px; height: 9px;
+  margin-top: 7px;
+  border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+}
+.pub.open .chev { transform: rotate(-135deg); margin-top: 11px; }
+.pub-meta { margin: 4px 0 0 23px; color: #555; font-size: 0.95rem; }
+.pub-more { display: none; margin: 6px 0 0 23px; font-size: 0.95rem; }
+.pub.open .pub-more { display: block; }
+.pub-more p { margin: 4px 0; }
+.pub-tag {
+  display: inline-block;
+  margin: 2px 6px 2px 0;
+  padding: 1px 10px;
+  border-radius: 999px;
+  background: #eef3f8;
+  color: var(--blue);
+  font-size: 0.82rem;
+}
+.pub-empty { color: var(--muted); font-style: italic; }
