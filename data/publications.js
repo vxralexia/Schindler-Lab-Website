@@ -9,6 +9,323 @@
 //  - New papers are added automatically every week (scripts/update_publications.py).
 window.PUBLICATIONS = [
   {
+    "title": "A 3-D Printed Millifluidic Reactor for Continuous Flow Photocatalysis in the Teaching Laboratory",
+    "authors": "Ryan T. Snyder, Alan K. Wortman, Yue Xin, Laura I. Penabad, Lauren Caroline Rich, Corinna S. Schindler, Robert T. Kennedy, and Corey R. J. Stephenson",
+    "journal": "Journal of Chemical Education",
+    "year": 2026,
+    "volume": "103",
+    "pages": "1525–1529",
+    "doi": "10.1021/acs.jchemed.5c01125",
+    "topics": [
+      "photochemistry",
+      "electrochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Data-Driven Interrogation of Reactivity in Acid-Catalyzed Carbonyl–Olefin Metathesis with Machine Learning and Large Language Models",
+    "authors": "Zi-Hao Li, Yutao Kuang, Stephen A. Chamness, Ethan Prout, Gabriel Jones-Thomson, Ben Niu, Timothy J. McClure, Sean M. Burns, Corinna S. Schindler, and Jolene P. Reid",
+    "journal": "Journal of the American Chemical Society",
+    "year": 2026,
+    "volume": "148",
+    "pages": "21545–21557",
+    "doi": "10.1021/jacs.6c00975",
+    "topics": [
+      "com"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Direct Ketone-to-2 H -Chromyne Conversion Enabling Alkyne-Ene Reactions and Synthetic Entry into the Nyingchinoid Natural Products",
+    "authors": "Michael R. Gatazka, Emily F. Traficante, Woojin Lee, Trenton R. Vogel, Alistair D. Richardson, Nicolas Hernandez, Kendall N. Houk, and Corinna S. Schindler",
+    "journal": "Journal of the American Chemical Society",
+    "year": 2026,
+    "volume": "148",
+    "pages": "35446–35455",
+    "doi": "10.1021/jacs.6c05940",
+    "topics": [
+      "total-synthesis"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "N-Phosphinyl Imines Enable Intermolecular Aza Paternò–Büchi Reactions with Unactivated Alkenes",
+    "authors": "Scott L. Kim, Lillian J. Carleu, and Corinna S. Schindler",
+    "journal": "ChemRxiv",
+    "year": 2026,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv.15007906/v1",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "N-Phosphoryl Imines Enable Intermolecular Aza Paternò–Büchi Reactions with Unactivated and Activated Alkenes",
+    "authors": "Scott L. Kim, Lillian J. Carleu, and Corinna S. Schindler",
+    "journal": "ChemRxiv",
+    "year": 2026,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv.15007906/v2",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Penta-Substituted Pyridines from Alkynes and Isoxazolines via Consecutive [2+2]-Cycloadditions",
+    "authors": "Pieter Boer, Lillian J. Carleu, Seren G. Parikh, Emily R. Wearing, and Corinna S. Schindler",
+    "journal": "Synthesis",
+    "year": 2026,
+    "volume": "58",
+    "pages": "2014–2018",
+    "doi": "10.1055/a-2883-1335",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Stereoselectivity in Liquid Aerosols through Acid-Mediated Epoxide Ring-Opening Reactions",
+    "authors": "Cara M. Waters, Madeline E. Cooke, N. Cazimir Armstrong, Qiyuan Zhao, Michael R. Gatazka, Yuzhi Chen, Scarlet Aguilar-Martinez, Ziying Lei, Joshua A. Kammeraad, Luis A. Ladino, Anel V. Alfonso, Zhenfa Zhang, Avram R. Gold, Corinna S. Schindler, Paul Martin Zimmerman, Jason D. Surratt, and Andrew P. Ault",
+    "journal": "Journal of the American Chemical Society",
+    "year": 2026,
+    "volume": "148",
+    "pages": "35655–35667",
+    "doi": "10.1021/jacs.6c07307",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "Visible-Light-Mediated Aryl Ketone Coupling with Vinyl Thianthrenium Salts Enables Formal Paternò-Büchi Reactions",
+    "authors": "Stephen A. Chamness, Matthew Liu, Jim Erdei, Toni Weise, and Corinna S. Schindler",
+    "journal": "ChemRxiv",
+    "year": 2026,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv-2025-0kdn2/v2",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Visible-Light-Mediated aza Paternò–Büchi Reactions and Related Cycloadditions for the Formation of Azetidines and Azetines",
+    "authors": "Cody H. Ng and Corinna S. Schindler",
+    "journal": "Accounts of Chemical Research",
+    "year": 2026,
+    "volume": "59",
+    "pages": "1026–1042",
+    "doi": "10.1021/acs.accounts.5c00914",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Visible-light-mediated synthesis of 2-oxetanes via Giese addition to α-oxy radicals",
+    "authors": "Matthew Liu, Elvis C. McFee, and Corinna S. Schindler",
+    "journal": "Chemical Science",
+    "year": 2026,
+    "volume": "17",
+    "pages": "6507–6512",
+    "doi": "10.1039/d5sc07764h",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Access to Highly Substituted Pyridines via Energy Transfer",
+    "authors": "Corinna S. Schindler, Pieter Boer, Lillian J. Carleu, Seren G. Parikh, and Emily R. Wearing",
+    "journal": "ChemRxiv",
+    "year": 2025,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv-2025-jsqj5",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Accessing and Utilizing Thiols in Organic Chemistry",
+    "authors": "Corinna S. Schindler, Sean M. Burns, Oscar Fernandez Lama, Matthew Liu, Lillian J. Carleu, and Liam D N Krueckl",
+    "journal": "ChemRxiv",
+    "year": 2025,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv-2025-wkwwv",
+    "topics": [
+      "desulfurization"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Copper-Mediated Nucleophilic Desulfurization of Thiols",
+    "authors": "Corinna S. Schindler, Sean M. Burns, and Oscar Fernandez Lama",
+    "journal": "ChemRxiv",
+    "year": 2025,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv-2025-vl7tt",
+    "topics": [
+      "desulfurization"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Direct Ketone Conversion to Cyclohexynes for Alkyne-Ene Reactions",
+    "authors": "Corinna S. Schindler, Ken N. Houk, Emily F. Traficante, Michael R. Gatazka, Woojin Lee, Trenton Vogel, Alistair D. Richardson, and Nicolas Hernandez",
+    "journal": "ChemRxiv",
+    "year": 2025,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv-2025-6q0d0",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "Interrupted Carbonyl–Olefin Metathesis of Cyclic, Aliphatic Ketones",
+    "authors": "Emily F. Traficante, Sean M. Burns, Junhyeong Kim, Daniel J. Nasrallah, Ho Ryu, Dongju Kim, Matthew S. Galliher, Haley Albright, Hannah L. Vonesh, Mu‐Hyun Baik, and Corinna S. Schindler",
+    "journal": "ACS Catalysis",
+    "year": 2025,
+    "volume": "15",
+    "pages": "18877–18884",
+    "doi": "10.1021/acscatal.5c03642",
+    "topics": [
+      "com"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Iron(III)-Catalysis in Flow: A Sustainable Alternative to Precious-Metal-Based Lewis Acidic Superelectrophiles for Carbonyl-Olefin Metathesis",
+    "authors": "Ashlee J. Davis, Sean M. Burns, Christopher P. Breen, Jianyu Zhai, Evan K. Ferry, Timothy F. Jamison, Jolene P. Reid, and Corinna S. Schindler",
+    "journal": "ACS Catalysis",
+    "year": 2025,
+    "volume": "15",
+    "pages": "10847–10855",
+    "doi": "10.1021/acscatal.4c07535",
+    "topics": [
+      "com",
+      "electrochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Mechanistic Investigations into the Olefination of Oximes and Hydrazones Support Intermediate Ruthenium Nitrides",
+    "authors": "Jacob R. Ludwig, John J. Kiernicki, Daniel J. Nasrallah, Troy E. Zehnder, Matthias Zeller, Nathaniel K. Szymczak, and Corinna S. Schindler",
+    "journal": "Journal of the American Chemical Society",
+    "year": 2025,
+    "volume": "147",
+    "pages": "14422–14431",
+    "doi": "10.1021/jacs.5c00787",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "Monocyclic Azetidines via a Visible-Light-Mediated Aza Paternò-Büchi Reaction of Ketone-Derived Sulfonylimines",
+    "authors": "Cody H. Ng, Emily R. Wearing, Dominique E. Blackmun, Gianmarco Terrones, Jéssica Toigo, Ka‐Ming Tong, Kaid C. Harper, Julia C. Donovan, Madeleine A. Gonley, Eric A. Voight, Benjamin D. Bergstrom, Michael O. Wolf, Heather J. Kulik, and Corinna S. Schindler",
+    "journal": "Journal of the American Chemical Society",
+    "year": 2025,
+    "volume": "147",
+    "pages": "29722–29731",
+    "doi": "10.1021/jacs.5c04692",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Reimagining Polymer Networks from Molecule to Material",
+    "authors": "Noy B. Nechmad, Luis M. Campos, Stephen L. Craig, Chuting Deng, Jackson Diodati, Sunay D. Ekim, Emmanuel A. Garcia Villatoro, Jian Ping Gong, Abraham Herzog‐Arbeitman, Xiao Huang, Jeremiah A. Johnson, Julia A. Kalow, Ryann E. Kemmerling, Ilia Kevlishvili, Ana Paula Kitos Vasconcelos, Rebekka S. Klausen, Heather J. Kulik, Jorge Leganés, Yingzi Ma, Elvis Mcfee, Juana Mendenhall, Jeffrey S. Moore, Alshakim Nelson, Bradley D. Olsen, Michael Rubinstein, Corinna S. Schindler, Nancy R. Sottos, Nicole F. Steinmetz, Shixuan Wei, and Fangbai Xie",
+    "journal": "Macromolecules",
+    "year": 2025,
+    "volume": "58",
+    "pages": "12909–12930",
+    "doi": "10.1021/acs.macromol.5c02040",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "Ruthenium-Catalyzed Formation of 1-Azetines via Oxidative β-Elimination from Azetidine Benzoates",
+    "authors": "Dominique E. Blackmun, Michael R. Gatazka, Po-Jui Chiu, M. Becker, and Corinna S. Schindler",
+    "journal": "ACS Catalysis",
+    "year": 2025,
+    "volume": "15",
+    "pages": "4934–4941",
+    "doi": "10.1021/acscatal.4c07186",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Synthesis of 6-methoxy-2-methyl-2-(4-methylpent-3-en-1-yl)chroman-4-one via Kabbe Condensation",
+    "authors": "Stephen A. Chamness, Emily F. Traficante, Trenton R. Vogel, and Corinna S. Schindler",
+    "journal": "Organic Syntheses",
+    "year": 2025,
+    "volume": "102",
+    "pages": "1–15",
+    "doi": "10.1002/0471264229.os102.20",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "Visible-Light-Mediated Aryl Ketone Coupling with Vinyl Thianthrenium Salts Enables Formal Paternò-Büchi Reaction.",
+    "authors": "Corinna S. Schindler, Stephen A. Chamness, Matthew Liu, Joseph Erdei, and Toni Weise",
+    "journal": "ChemRxiv",
+    "year": 2025,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv-2025-0kdn2",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Bis(oxazoline) Iron Complexes Enable Tuning of Lewis Acidity for Catalytic Carbonyl–Olefin Metathesis",
+    "authors": "Jessica L. Gomez-Lopez, Ashlee J. Davis, Timothy J. McClure, Mina Son, Daniel C. Steigerwald, Rebecca B. Watson, Mu‐Hyun Baik, and Corinna S. Schindler",
+    "journal": "ACS Catalysis",
+    "year": 2024,
+    "volume": "15",
+    "pages": "601–607",
+    "doi": "10.1021/acscatal.3c04684",
+    "topics": [
+      "com"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Ketyl Radical Enabled Synthesis of Oxetanes",
+    "authors": "Corinna S. Schindler, Michael R. Gatazka, Seren G. Parikh, and Katie A. Rykaczewski",
+    "journal": "Synthesis",
+    "year": 2024,
+    "volume": "56",
+    "pages": "2513–2520",
+    "doi": "10.1055/s-0043-1774907",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
+    "title": "Photoredox‐Catalyzed Decarboxylation of Oxetane‐2‐Carboxylic Acids and Unique Mechanistic Insights",
+    "authors": "Elvis C. McFee, Katie A. Rykaczewski, and Corinna S. Schindler",
+    "journal": "Angewandte Chemie International Edition",
+    "year": 2024,
+    "volume": "64",
+    "pages": "e202405125–e202405125",
+    "doi": "10.1002/anie.202405125",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
     "title": "Synthesis and Biological Activity of Penaresidins A and B, Penazetidine A, and Related Analogues",
     "authors": "Burns, S. M. et al.",
     "journal": "Synthesis",
@@ -62,6 +379,28 @@ window.PUBLICATIONS = [
     "needs_review": false
   },
   {
+    "title": "CCDC 2306642: Experimental Crystal Structure Determination",
+    "authors": "Cody H. Ng, Kim, Scott, Ilia Kevlishviil, Gianmarco Terrones, Emily R. Wearing, Heather J. Kulik, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2023,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc2hf7t0",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "CCDC 2308821: Experimental Crystal Structure Determination",
+    "authors": "Cody H. Ng, Kim, Scott, Ilia Kevlishviil, Gianmarco Terrones, Emily R. Wearing, Heather J. Kulik, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2023,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc2hhj3n",
+    "topics": [],
+    "needs_review": true
+  },
+  {
     "title": "Development of an In Situ Protocol for the Intramolecular Olefination of Oximes",
     "authors": "Zehnder, T. E. et al.",
     "journal": "Organometallics",
@@ -71,6 +410,17 @@ window.PUBLICATIONS = [
     "doi": "10.1021/acs.organomet.3c00045",
     "topics": [],
     "needs_review": false
+  },
+  {
+    "title": "SYNTHESIS Special Issue in Honor of Professor Cristina Nevado",
+    "authors": "Margaret M. Faul, Corinna S. Schindler, and Alois Fürstner",
+    "journal": "Synthesis",
+    "year": 2023,
+    "volume": "55",
+    "pages": "1613–1615",
+    "doi": "10.1055/s-0040-1720068",
+    "topics": [],
+    "needs_review": true
   },
   {
     "title": "Synthetic Strategies Towards the Meroterpenoids Cochlearols A and B from Ganoderma cochlear",
@@ -84,6 +434,105 @@ window.PUBLICATIONS = [
       "total-synthesis"
     ],
     "needs_review": false
+  },
+  {
+    "title": "CCDC 2096573: Experimental Crystal Structure Determination",
+    "authors": "Emily R. Wearing, Dominique E. Blackmun, M. Becker, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc28cndq",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "CCDC 2133096: Experimental Crystal Structure Determination",
+    "authors": "Dominique E. Blackmun, Stephen A. Chamness, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc29lnk4",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "CCDC 2142344: Experimental Crystal Structure Determination",
+    "authors": "Alistair D. Richardson, Trenton R. Vogel, Emily F. Traficante, Kason J. Glover, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc29x8wd",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "CCDC 2142345: Experimental Crystal Structure Determination",
+    "authors": "Alistair D. Richardson, Trenton R. Vogel, Emily F. Traficante, Kason J. Glover, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc29x8xf",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "CCDC 2179065: Experimental Crystal Structure Determination",
+    "authors": "Katie A. Rykaczewski, M. Becker, Manasi J. Anantpur, Rosario C. Sausa, Eric C. Johnson, Joshua A. Orlicki, Eric J. Bukowski, Jesse J. Sabatini, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc2c4hfg",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "CCDC 2179072: Experimental Crystal Structure Determination",
+    "authors": "Katie A. Rykaczewski, M. Becker, Manasi J. Anantpur, Rosario C. Sausa, Eric C. Johnson, Joshua A. Orlicki, Eric J. Bukowski, Jesse J. Sabatini, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc2c4hnp",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "CCDC 2179080: Experimental Crystal Structure Determination",
+    "authors": "Katie A. Rykaczewski, M. Becker, Manasi J. Anantpur, Rosario C. Sausa, Eric C. Johnson, Joshua A. Orlicki, Eric J. Bukowski, Jesse J. Sabatini, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc2c4hxy",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "CCDC 2179082: Experimental Crystal Structure Determination",
+    "authors": "Katie A. Rykaczewski, M. Becker, Manasi J. Anantpur, Rosario C. Sausa, Eric C. Johnson, Joshua A. Orlicki, Eric J. Bukowski, Jesse J. Sabatini, and Corinna S. Schindler",
+    "journal": "The Cambridge Structural Database",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc2c4hz0",
+    "topics": [],
+    "needs_review": true
+  },
+  {
+    "title": "CCDC 2211280: Experimental Crystal Structure Determination",
+    "authors": "Corinna S. Schindler, Cody H. Ng, Kim, Scott, Ilia Kevlishvili, Gianmarco Terrones, Emily R. Wearing, and Heather J. Kulik",
+    "journal": "The Cambridge Structural Database",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.5517/ccdc.csd.cc2d70m9",
+    "topics": [],
+    "needs_review": true
   },
   {
     "title": "Fe(III)-Catalysis in Flow Enables Bimolecular Proton Transfer as an Alternative to Superelectrophiles in Carbonyl-Olefin Metathesis",
@@ -109,6 +558,19 @@ window.PUBLICATIONS = [
     "doi": "10.1002/anie.202112101",
     "topics": [],
     "needs_review": false
+  },
+  {
+    "title": "Inadequacy of Continuum Solvation for Polar Reactions: Predicting the Mechanism of Carbonyl–Olefin Metathesis",
+    "authors": "Corinna S. Schindler, Eugene E. Kwan, Hannah L. Vonesh, Corin Wagen, Spencer E. McMinn, and Joshua Thedford",
+    "journal": "ChemRxiv",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv-2022-nnp81",
+    "topics": [
+      "com"
+    ],
+    "needs_review": true
   },
   {
     "title": "Intramolecular, Visible Light-Mediated Aza Paternò-Büchi Reactions of Unactivated Alkenes",
@@ -186,6 +648,19 @@ window.PUBLICATIONS = [
       "photochemistry"
     ],
     "needs_review": false
+  },
+  {
+    "title": "Visible Light-Mediated [2+2]-Cycloadditions for the Formation of Macrocyclic Dimers",
+    "authors": "Corinna S. Schindler, Cody H. Ng, Scott Kim, Ilia Kevlishvili, Gianmarco Terrones, Emily R. Wearing, and Heather J. Kulik",
+    "journal": "ChemRxiv",
+    "year": 2022,
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv-2022-h55mx",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
   },
   {
     "title": "1- and 2-Azetines via Visible Light-Mediated [2 + 2]-Cycloadditions of Alkynes and Oximes",
