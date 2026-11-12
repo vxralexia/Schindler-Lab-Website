@@ -10,17 +10,23 @@
     ["desulfurization", "Desulfurization"],
     ["bc-cancer", "BC Cancer Research"]
   ];
-  // Newest first: year, then exact publication date (when known), then the old list number.
+  // Newest first. Numbered papers by their permanent number; preprints by date.
+  function isPreprint(p) {
+    return /chemrxiv|arxiv|biorxiv|medrxiv|research square|ssrn|preprint/i.test(p.journal || "") ||
+      String(p.doi || "").indexOf("10.26434/") === 0;
+  }
   function sortKey(p) {
     var y = String(p.year || 0);
     var d = p.date && p.date.indexOf(y) === 0 ? p.date.slice(0, 10) : "";
-    var s = ("000000" + (p.seq || 0)).slice(-6);
-    return y + "|" + d + "|" + s;
+    var n = ("000000" + (p.number || p.seq || 0)).slice(-6);
+    return p.number ? n + "|" + d : y + "|" + d + "|" + n;
   }
-  var pubs = (window.PUBLICATIONS || []).filter(function (p) { return !p.hidden; }).sort(function (a, b) {
+  function newestFirst(a, b) {
     var ka = sortKey(a), kb = sortKey(b);
     return ka < kb ? 1 : ka > kb ? -1 : 0;
-  });
+  }
+  var pubs = (window.PUBLICATIONS || []).filter(function (p) { return !p.hidden; });
+
   var state = { topic: "all", year: "all", q: "" };
 
   var tabsEl = document.getElementById("pub-topics");
@@ -109,24 +115,49 @@
         (state.q ? " for “" + esc(state.q) + "”" : " in this category yet") + ".</p>";
       return;
     }
-    var byYear = {};
-    shown.forEach(function (p) { (byYear[p.year] = byYear[p.year] || []).push(p); });
+    var preprints = shown.filter(isPreprint).sort(newestFirst);
+    var prior = shown.filter(function (p) { return p.prior && !isPreprint(p); }).sort(newestFirst);
+    var main = shown.filter(function (p) { return !p.prior && !isPreprint(p); }).sort(newestFirst);
+
     var html = "";
-    Object.keys(byYear).sort(function (a, b) { return b - a; }).forEach(function (y) {
-      html += '<section class="pub-year"><h3>' + esc(y) + '</h3><ul>';
-      byYear[y].forEach(function (p) {
-        var tags = (p.topics || []).map(function (t) {
-          return '<span class="pub-tag">' + esc(topicName(t)) + "</span>";
-        }).join("");
-        var link = p.doi ? '<a href="https://doi.org/' + esc(p.doi) + '" target="_blank" rel="noopener">View paper (DOI: ' + esc(p.doi) + ") &#8599;</a>" : "";
-        html += '<li class="pub"><button type="button" class="pub-toggle" aria-expanded="false">' +
-          '<span class="chev" aria-hidden="true"></span><span class="pub-title">' + esc(p.title) + "</span></button>" +
-          '<p class="pub-meta">' + esc(p.authors) + (citation(p) ? (/\.\s*$/.test(p.authors) ? " " : ". ") + citation(p) : "") + "</p>" +
-          '<div class="pub-more">' + (link ? "<p>" + link + "</p>" : "") + (tags ? '<p class="pub-tags">' + tags + "</p>" : "") + "</div></li>";
-      });
-      html += "</ul></section>";
-    });
+    if (preprints.length) {
+      html += '<section class="pub-section"><h2 class="pub-section-title">Preprints</h2>' +
+        '<ul class="pub-flat">' + preprints.map(item).join("") + "</ul></section>";
+    }
+    if (main.length) {
+      html += '<section class="pub-section">' + (preprints.length || prior.length ? '<h2 class="pub-section-title">Publications</h2>' : "") +
+        byYear(main) + "</section>";
+    }
+    if (prior.length) {
+      html += '<section class="pub-section pub-prior"><h2 class="pub-section-title">Prior Publications</h2>' +
+        '<p class="pub-section-note">Before Prof. Schindler’s independent career: research with K. C. Nicolaou, Erick M. Carreira and Eric N. Jacobsen.</p>' +
+        byYear(prior) + "</section>";
+    }
     listEl.innerHTML = html;
+  }
+
+  function byYear(list) {
+    var groups = [], seen = {};
+    list.forEach(function (p) {
+      if (!seen[p.year]) { seen[p.year] = []; groups.push(p.year); }
+      seen[p.year].push(p);
+    });
+    groups.sort(function (a, b) { return b - a; });
+    return groups.map(function (y) {
+      return '<div class="pub-year"><h3>' + esc(y) + "</h3><ul>" + seen[y].map(item).join("") + "</ul></div>";
+    }).join("");
+  }
+
+  function item(p) {
+    var tags = (p.topics || []).map(function (t) {
+      return '<span class="pub-tag">' + esc(topicName(t)) + "</span>";
+    }).join("");
+    var link = p.doi ? '<a href="https://doi.org/' + esc(p.doi) + '" target="_blank" rel="noopener">View paper (DOI: ' + esc(p.doi) + ") &#8599;</a>" : "";
+    var num = p.number ? '<span class="pub-num">' + p.number + ".</span>" : (isPreprint(p) ? '<span class="pub-num pub-pre">Preprint</span>' : "");
+    return '<li class="pub"><button type="button" class="pub-toggle" aria-expanded="false">' +
+      '<span class="chev" aria-hidden="true"></span>' + num + '<span class="pub-title">' + esc(p.title) + "</span></button>" +
+      '<p class="pub-meta">' + esc(p.authors) + (citation(p) ? (/\.\s*$/.test(p.authors) ? " " : ". ") + citation(p) : "") + "</p>" +
+      '<div class="pub-more">' + (link ? "<p>" + link + "</p>" : "") + (tags ? '<p class="pub-tags">' + tags + "</p>" : "") + "</div></li>";
   }
 
   // Expand / collapse a paper

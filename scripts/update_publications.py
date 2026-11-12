@@ -45,7 +45,9 @@ TOPIC_KEYWORDS = {
                        r"heterocycl", r"pyrrol", r"pyridine", r"pyran", r"furan"],
     "electrochemistry": [r"electro(?!phil)", r"\bflow\b", r"high.throughput", r"automat"],
     "desulfurization": [r"desulfur", r"\bthiols?\b", r"\bsulfur", r"thioether", r"sulfide"],
-    "bc-cancer": [r"cancer", r"tumou?r", r"oncolog", r"nf.?κb", r"nf.?kappa", r"\bikk"],
+    # BC Cancer Research is not guessed from keywords (general cancer-related titles
+    # are not necessarily BC Cancer projects). Add "bc-cancer" to a paper's topics by hand.
+    "bc-cancer": [],
 }
 
 
@@ -63,12 +65,12 @@ HEADER = """// Schindler Lab publications. This file is read by publications.htm
 //    A paper can have several topics, e.g. "topics": ["com", "photochemistry"]
 //  - "needs_review": true means the topic was guessed automatically. After you
 //    check it, change it to false (or delete the line).
-<<<<<<< HEAD
-=======
+//  - "number" is the paper's permanent publication number (1 = Corinna's first
+//    paper). New journal papers get the next number automatically; preprints
+//    are not numbered. "prior": true puts a paper under "Prior Publications".
 //  - "hidden": true keeps a paper off the website but stops it from being added
 //    again. Preprints are hidden automatically once a newer version or the
 //    published paper exists. To show a paper again, delete its "hidden" line.
->>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
 //  - New papers are added automatically every week (scripts/update_publications.py).
 """
 
@@ -86,27 +88,31 @@ def load():
 
 
 def save(pubs):
-<<<<<<< HEAD
-    pubs.sort(key=lambda p: (-int(p.get("year") or 0), p.get("title", "").lower()))
-=======
     pubs.sort(key=sort_key, reverse=True)
->>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         f.write(HEADER + "window.PUBLICATIONS = ")
         f.write(json.dumps(pubs, ensure_ascii=False, indent=2))
         f.write(";\n")
 
 
-<<<<<<< HEAD
-=======
 def sort_key(p):
-    """Newest first: by publication date when known, otherwise by the old list number."""
+    """Newest first: by publication number when known, otherwise by date."""
     year = int(p.get("year") or 0)
     date = p.get("date") or ""
-    return (year, date[:10] if date.startswith(str(year)) else "", int(p.get("seq") or 0))
+    return (year, int(p.get("number") or 0), date[:10] if date.startswith(str(year)) else "", int(p.get("seq") or 0))
 
 
->>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
+def assign_numbers(pubs):
+    """Give each new journal paper the next publication number (preprints are not numbered)."""
+    top = max([int(p.get("number") or 0) for p in pubs] + [0])
+    todo = [p for p in pubs if not p.get("number") and not p.get("hidden") and not is_preprint(p)]
+    todo.sort(key=lambda p: (int(p.get("year") or 0), p.get("date") or ""))
+    for p in todo:
+        top += 1
+        p["number"] = top
+    return todo
+
+
 def norm_title(t):
     t = unicodedata.normalize("NFKD", t or "").encode("ascii", "ignore").decode().lower()
     return re.sub(r"[^a-z0-9]+", "", t)
@@ -170,10 +176,7 @@ def to_entry(w):
         "authors": authors,
         "journal": src.get("display_name") or "",
         "year": w.get("publication_year"),
-<<<<<<< HEAD
-=======
         "date": w.get("publication_date") or "",
->>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
         "volume": bib.get("volume") or "",
         "pages": pages,
         "doi": norm_doi(w.get("doi")),
@@ -182,9 +185,6 @@ def to_entry(w):
     }
 
 
-<<<<<<< HEAD
-SKIP_TYPES = {"paratext", "erratum", "retraction", "peer-review", "editorial", "letter", "other"}
-=======
 SKIP_TYPES = {"paratext", "erratum", "retraction", "peer-review", "editorial", "letter", "other",
               "dataset", "supplementary-materials"}
 # Records that are not papers (crystal structures, supporting information, ...)
@@ -278,39 +278,16 @@ def hide_superseded_preprints(pubs, use_crossref=True):
                 newly.append(p)
                 break
     return newly
->>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
 
 
 def main():
     pubs = load()
-<<<<<<< HEAD
-    have_doi = {norm_doi(p.get("doi")) for p in pubs if p.get("doi")}
-    have_title = {norm_title(p.get("title")) for p in pubs}
-=======
->>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
     print("Finding author in OpenAlex...")
     ids = find_author_ids()
     if not ids:
         raise SystemExit("Author not found. Set SCHINDLER_ORCID to fix this.")
     works = fetch_works(ids)
     print(f"OpenAlex returned {len(works)} papers since {START_YEAR}.")
-<<<<<<< HEAD
-    added = []
-    for w in works:
-        if w.get("type") in SKIP_TYPES:
-            continue
-        e = to_entry(w)
-        if not e["title"]:
-            continue
-        if (e["doi"] and e["doi"] in have_doi) or norm_title(e["title"]) in have_title:
-            continue
-        pubs.append(e)
-        have_doi.add(e["doi"])
-        have_title.add(norm_title(e["title"]))
-        added.append(e)
-    if added:
-        save(pubs)
-=======
     by_doi = {norm_doi(p.get("doi")): p for p in pubs if p.get("doi")}
     by_title = {norm_title(p.get("title")): p for p in pubs}
     added, dated = [], 0
@@ -341,14 +318,16 @@ def main():
         by_title[norm_title(e["title"])] = e
         added.append(e)
     hidden = hide_superseded_preprints(pubs)
-    if added or dated or hidden:
+    numbered = assign_numbers(pubs)
+    for p in numbered:
+        print(f"Numbered #{p['number']}: {p['title']}")
+    if added or dated or hidden or numbered:
         save(pubs)
     for p in hidden:
         print(f"Hid preprint: {p['title']} ({p['hidden_reason']})")
     if dated:
         print(f"Filled in publication dates for {dated} paper(s) already on the site.")
     if added:
->>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
         print(f"\nAdded {len(added)} new paper(s):")
         for e in added:
             t = ", ".join(TOPICS[k] for k in e["topics"]) or "NO TOPIC GUESSED - please set one"
@@ -359,14 +338,10 @@ def main():
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a", encoding="utf-8") as f:
-<<<<<<< HEAD
-            f.write(f"### Publications update\n\n{len(added)} new paper(s) added.\n\n")
-=======
             f.write(f"### Publications update\n\n{len(added)} new paper(s) added, "
                     f"{len(hidden)} preprint(s) hidden because a newer or published version exists.\n\n")
             for p in hidden:
                 f.write(f"- Hidden: {p['title']} ({p['hidden_reason']})\n")
->>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
             for e in added:
                 t = ", ".join(TOPICS[k] for k in e["topics"]) or "**no topic guessed**"
                 f.write(f"- {e['year']} — {e['title']} (topic: {t})\n")
