@@ -77,7 +77,12 @@ def load():
     with open(DATA_FILE, encoding="utf-8") as f:
         text = f.read()
     m = re.search(r"window\.PUBLICATIONS\s*=\s*(\[.*\])\s*;", text, re.S)
-    return json.loads(m.group(1)) if m else []
+    if not m:
+        # Safety stop: the file isn't the list of papers (e.g. a file was put in the
+        # wrong folder). Stop instead of starting a new, nearly empty list.
+        raise SystemExit("data/publications.js does not contain the publication list "
+                         "(window.PUBLICATIONS = [...]). Nothing was changed.")
+    return json.loads(m.group(1))
 
 
 def save(pubs):
