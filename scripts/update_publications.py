@@ -63,6 +63,12 @@ HEADER = """// Schindler Lab publications. This file is read by publications.htm
 //    A paper can have several topics, e.g. "topics": ["com", "photochemistry"]
 //  - "needs_review": true means the topic was guessed automatically. After you
 //    check it, change it to false (or delete the line).
+<<<<<<< HEAD
+=======
+//  - "hidden": true keeps a paper off the website but stops it from being added
+//    again. Preprints are hidden automatically once a newer version or the
+//    published paper exists. To show a paper again, delete its "hidden" line.
+>>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
 //  - New papers are added automatically every week (scripts/update_publications.py).
 """
 
@@ -75,13 +81,27 @@ def load():
 
 
 def save(pubs):
+<<<<<<< HEAD
     pubs.sort(key=lambda p: (-int(p.get("year") or 0), p.get("title", "").lower()))
+=======
+    pubs.sort(key=sort_key, reverse=True)
+>>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         f.write(HEADER + "window.PUBLICATIONS = ")
         f.write(json.dumps(pubs, ensure_ascii=False, indent=2))
         f.write(";\n")
 
 
+<<<<<<< HEAD
+=======
+def sort_key(p):
+    """Newest first: by publication date when known, otherwise by the old list number."""
+    year = int(p.get("year") or 0)
+    date = p.get("date") or ""
+    return (year, date[:10] if date.startswith(str(year)) else "", int(p.get("seq") or 0))
+
+
+>>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
 def norm_title(t):
     t = unicodedata.normalize("NFKD", t or "").encode("ascii", "ignore").decode().lower()
     return re.sub(r"[^a-z0-9]+", "", t)
@@ -145,6 +165,10 @@ def to_entry(w):
         "authors": authors,
         "journal": src.get("display_name") or "",
         "year": w.get("publication_year"),
+<<<<<<< HEAD
+=======
+        "date": w.get("publication_date") or "",
+>>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
         "volume": bib.get("volume") or "",
         "pages": pages,
         "doi": norm_doi(w.get("doi")),
@@ -153,19 +177,119 @@ def to_entry(w):
     }
 
 
+<<<<<<< HEAD
 SKIP_TYPES = {"paratext", "erratum", "retraction", "peer-review", "editorial", "letter", "other"}
+=======
+SKIP_TYPES = {"paratext", "erratum", "retraction", "peer-review", "editorial", "letter", "other",
+              "dataset", "supplementary-materials"}
+# Records that are not papers (crystal structures, supporting information, ...)
+SKIP_TITLES = [r"^ccdc\s*\d+", r"crystal structure determination", r"^csd\s*\d+",
+               r"supporting information", r"supplementary (information|data|material)"]
+SKIP_SOURCES = [r"cambridge structural database", r"\bccdc\b", r"figshare", r"zenodo"]
+
+
+def is_not_a_paper(w, title, journal):
+    if w.get("type") in SKIP_TYPES:
+        return True
+    if any(re.search(p, title, re.I) for p in SKIP_TITLES):
+        return True
+    return any(re.search(p, journal or "", re.I) for p in SKIP_SOURCES)
+
+
+# ---------------------------------------------------------------- preprints
+PREPRINT_RE = r"chemrxiv|arxiv|biorxiv|medrxiv|research square|ssrn|preprint"
+
+
+def is_preprint(p):
+    return bool(re.search(PREPRINT_RE, p.get("journal", ""), re.I)) or (p.get("doi") or "").startswith("10.26434/")
+
+
+STOP = set("a an the of and for to in on via with by from as at or its their using enable enables enabled".split())
+
+
+def title_words(t):
+    t = re.sub(r"<[^>]+>", "", (t or "").lower())
+    return {w for w in re.findall(r"[a-z0-9]+", t) if w not in STOP and len(w) > 1}
+
+
+def title_similarity(a, b):
+    A, B = title_words(a), title_words(b)
+    return len(A & B) / max(1, len(A | B))
+
+
+def crossref_published_doi(doi):
+    """ChemRxiv records 'is-preprint-of' in Crossref once a preprint is published."""
+    url = "https://api.crossref.org/works/" + urllib.parse.quote(doi)
+    mailto = os.environ.get("CROSSREF_MAILTO")
+    if mailto:
+        url += "?mailto=" + urllib.parse.quote(mailto)
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "SchindlerLabWebsite/1.0"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            rel = (json.load(r).get("message") or {}).get("relation") or {}
+        for item in rel.get("is-preprint-of", []):
+            if item.get("id"):
+                return norm_doi(item["id"])
+    except Exception as e:
+        print(f"  (could not check {doi} on Crossref: {e})")
+    return None
+
+
+def hide(p, reason):
+    p["hidden"] = True
+    p["hidden_reason"] = reason
+
+
+def hide_superseded_preprints(pubs, use_crossref=True):
+    """Hide preprints that have a newer version or a published paper. Returns what was hidden."""
+    newly = []
+    visible = lambda p: not p.get("hidden")
+    # 1) several versions of the same preprint DOI (…/v1, …/v2): keep only the newest
+    groups = {}
+    for p in pubs:
+        if is_preprint(p) and p.get("doi"):
+            base = re.sub(r"/v\d+$", "", p["doi"])
+            ver = int((re.search(r"/v(\d+)$", p["doi"]) or [0, 1])[1])
+            groups.setdefault(base, []).append((ver, p))
+    for versions in groups.values():
+        versions.sort(key=lambda x: x[0])
+        for ver, p in versions[:-1]:
+            if visible(p):
+                hide(p, "older version of a preprint")
+                newly.append(p)
+    # 2) ChemRxiv/Crossref says the preprint was published; 3) near-identical published title
+    published = [q for q in pubs if not is_preprint(q)]
+    for p in pubs:
+        if not (is_preprint(p) and visible(p)):
+            continue
+        pub_doi = crossref_published_doi(p["doi"]) if (use_crossref and p.get("doi")) else None
+        if pub_doi:
+            hide(p, f"published as {pub_doi}")
+            newly.append(p)
+            continue
+        for q in published:
+            if int(q.get("year") or 0) >= int(p.get("year") or 0) and title_similarity(p["title"], q["title"]) >= 0.75:
+                hide(p, f"published as {q.get('doi') or q['title']}")
+                newly.append(p)
+                break
+    return newly
+>>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
 
 
 def main():
     pubs = load()
+<<<<<<< HEAD
     have_doi = {norm_doi(p.get("doi")) for p in pubs if p.get("doi")}
     have_title = {norm_title(p.get("title")) for p in pubs}
+=======
+>>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
     print("Finding author in OpenAlex...")
     ids = find_author_ids()
     if not ids:
         raise SystemExit("Author not found. Set SCHINDLER_ORCID to fix this.")
     works = fetch_works(ids)
     print(f"OpenAlex returned {len(works)} papers since {START_YEAR}.")
+<<<<<<< HEAD
     added = []
     for w in works:
         if w.get("type") in SKIP_TYPES:
@@ -181,6 +305,45 @@ def main():
         added.append(e)
     if added:
         save(pubs)
+=======
+    by_doi = {norm_doi(p.get("doi")): p for p in pubs if p.get("doi")}
+    by_title = {norm_title(p.get("title")): p for p in pubs}
+    added, dated = [], 0
+    for w in works:
+        e = to_entry(w)
+        if not e["title"] or is_not_a_paper(w, e["title"], e["journal"]):
+            continue
+        existing = by_doi.get(e["doi"]) if e["doi"] else None
+        existing = existing or by_title.get(norm_title(e["title"]))
+        if existing:
+            # same preprint, newer version (…/v2 -> …/v3): point the link at the newest version
+            ex_doi, new_doi = existing.get("doi") or "", e["doi"]
+            if (new_doi and ex_doi != new_doi and is_preprint(existing)
+                    and re.sub(r"/v\d+$", "", ex_doi) == re.sub(r"/v\d+$", "", new_doi)):
+                ver = lambda d: int((re.search(r"/v(\d+)$", d) or [0, 1])[1])
+                if ver(new_doi) > ver(ex_doi):
+                    existing["doi"], existing["date"] = new_doi, e["date"] or existing.get("date", "")
+                    by_doi[new_doi] = existing
+                    dated += 1
+                continue
+            if not existing.get("date") and e["date"]:
+                existing["date"] = e["date"]      # only fills in the date, nothing else
+                dated += 1
+            continue
+        pubs.append(e)
+        if e["doi"]:
+            by_doi[e["doi"]] = e
+        by_title[norm_title(e["title"])] = e
+        added.append(e)
+    hidden = hide_superseded_preprints(pubs)
+    if added or dated or hidden:
+        save(pubs)
+    for p in hidden:
+        print(f"Hid preprint: {p['title']} ({p['hidden_reason']})")
+    if dated:
+        print(f"Filled in publication dates for {dated} paper(s) already on the site.")
+    if added:
+>>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
         print(f"\nAdded {len(added)} new paper(s):")
         for e in added:
             t = ", ".join(TOPICS[k] for k in e["topics"]) or "NO TOPIC GUESSED - please set one"
@@ -191,7 +354,14 @@ def main():
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a", encoding="utf-8") as f:
+<<<<<<< HEAD
             f.write(f"### Publications update\n\n{len(added)} new paper(s) added.\n\n")
+=======
+            f.write(f"### Publications update\n\n{len(added)} new paper(s) added, "
+                    f"{len(hidden)} preprint(s) hidden because a newer or published version exists.\n\n")
+            for p in hidden:
+                f.write(f"- Hidden: {p['title']} ({p['hidden_reason']})\n")
+>>>>>>> ed66dea1f93852fd793a029e45583ca700dbb979
             for e in added:
                 t = ", ".join(TOPICS[k] for k in e["topics"]) or "**no topic guessed**"
                 f.write(f"- {e['year']} — {e['title']} (topic: {t})\n")
