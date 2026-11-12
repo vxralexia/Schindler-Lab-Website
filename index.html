@@ -17,11 +17,31 @@
       <nav aria-label="Main">
         <ul>
         <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="people.html">People</a></li>
-        <li><a href="research.html">Research</a></li>
+        <li class="has-sub"><a href="research.html" aria-haspopup="true">Research<span class="caret" aria-hidden="true"></span></a>
+          <ul class="sub">
+            <li><a href="research.html#com">Carbonyl-Olefin Metathesis (COM)</a></li>
+            <li><a href="research.html#total-synthesis">Total Synthesis and Natural Products</a></li>
+            <li><a href="research.html#photochemistry">Photochemistry and Heterocycles</a></li>
+            <li><a href="research.html#electrochemistry">Electrochemistry and Technology Development</a></li>
+            <li><a href="research.html#desulfurization">Desulfurization</a></li>
+            <li><a href="research.html#bc-cancer">BC Cancer Research</a></li>
+          </ul>
+        </li>
         <li><a href="publications.html">Publications</a></li>
-        <li><a href="outreach.html">Outreach</a></li>
-        <li><a href="pictures.html">Pictures</a></li>
+        <li class="has-sub"><a href="members.html" aria-haspopup="true">Team<span class="caret" aria-hidden="true"></span></a>
+          <ul class="sub">
+            <li><a href="members.html">Group Members</a></li>
+            <li><a href="alumni.html">Former Group Members</a></li>
+          </ul>
+        </li>
+        <li><a href="corinna.html">About Corinna</a></li>
+        <li class="has-sub"><a href="pictures.html" aria-haspopup="true">Gallery<span class="caret" aria-hidden="true"></span></a>
+          <ul class="sub">
+            <li><a href="pictures.html#group-photos">Group Photos</a></li>
+            <li><a href="pictures.html#lab-instruments">Lab Instruments</a></li>
+            <li><a href="pictures.html#lab-tour">Lab Tour</a></li>
+          </ul>
+        </li>
         <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
@@ -35,11 +55,22 @@
   <main>
     <section class="block">
       <div class="wrap split">
-        <div class="photo-ph">Group photo goes here (images/group.jpg)</div>
+        <div class="slider" aria-roledescription="carousel" aria-label="Group photos">
+          <div class="slides">
+            <!-- To add a photo: put the image in the images folder, then add a line like
+                 <div class="slide"><img src="images/group-2025.jpg" alt="Schindler group, 2025"></div> -->
+            <div class="slide"><div class="photo-ph">Group photo 1 goes here</div></div>
+            <div class="slide"><div class="photo-ph">Group photo 2 goes here</div></div>
+            <div class="slide"><div class="photo-ph">Group photo 3 goes here</div></div>
+          </div>
+          <button class="slider-btn prev" type="button" aria-label="Previous photo">&#8249;</button>
+          <button class="slider-btn next" type="button" aria-label="Next photo">&#8250;</button>
+          <div class="dots"></div>
+        </div>
         <div>
           <h2>Our Group</h2>
           <p>Welcome to the Schindler group at the University of British Columbia in Vancouver. We are a team of synthetic chemists working at the interface of methodology, catalysis and natural product synthesis, jointly based in the Departments of Chemistry and Biochemistry &amp; Molecular Biology.</p>
-          <a class="btn" href="people.html">Learn more</a>
+          <a class="btn" href="members.html">Meet the team</a>
         </div>
       </div>
     </section>
@@ -82,10 +113,12 @@
         <h2 class="section-title">Research</h2>
         <p class="section-sub">We develop new synthetic organic and organometallic methods that enable the synthesis of biologically active molecules.</p>
         <div class="research-links">
-          <a href="research.html#earth-abundant">Earth-Abundant Metal Catalysis</a>
-          <a href="research.html#photochemistry">Visible-Light Photochemistry</a>
-          <a href="research.html#natural-products">Natural Product Synthesis</a>
-          <a href="research.html#biology">Biological Activity</a>
+          <a href="research.html#com">Carbonyl-Olefin Metathesis (COM)</a>
+          <a href="research.html#total-synthesis">Total Synthesis and Natural Products</a>
+          <a href="research.html#photochemistry">Photochemistry and Heterocycles</a>
+          <a href="research.html#electrochemistry">Electrochemistry and Technology Development</a>
+          <a href="research.html#desulfurization">Desulfurization</a>
+          <a href="research.html#bc-cancer">BC Cancer Research</a>
         </div>
       </div>
     </section>
@@ -140,5 +173,6 @@
     </div>
   </footer>
   <a class="to-top" href="#top" aria-label="Back to top">&#8963;</a>
+  <script src="site.js"></script>
 </body>
 </html>
