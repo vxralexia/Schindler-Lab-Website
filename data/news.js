@@ -12,14 +12,14 @@ window.NEWS = [
   {
     "date": "2026-10",
     "type": "Award",
-    "title": "Prof. Schindler receives an NSERC Arthur B. McDonald Fellowship",
+    "title": "Corinna receives an NSERC Arthur B. McDonald Fellowship",
     "link": "https://science.ubc.ca/news/2026-10/ubc-synthetic-chemist-named-one-canadas-top-young-researchers",
     "image": "assets/news/nserc-nov-2026.jpg"
   },
   {
     "date": "2026-08",
     "type": "Award",
-    "title": "Prof. Schindler named a 2027 ACS Arthur C. Cope Scholar",
+    "title": "Corinna named a 2027 ACS Arthur C. Cope Scholar",
     "link": "https://cen.acs.org/acs-news/acs-names-2027-national-award/104/web/2026/08",
     "image": "assets/news/arthur-cope.jpg"
   },
@@ -27,7 +27,7 @@ window.NEWS = [
   {
     "date": "2024-06",
     "type": "Award",
-    "title": "Prof. Schindler appointed Tier 1 Canada Research Chair in Synthetic Solutions for Bioactive Compounds",
+    "title": "Corinna appointed Tier 1 Canada Research Chair in Synthetic Solutions for Bioactive Compounds",
     "link": "https://research.ubc.ca/node/20511",
     "image": ""
   }
