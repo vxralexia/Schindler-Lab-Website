@@ -797,3 +797,74 @@ a.person:hover h3 { color: var(--orange); }
   .news-track { grid-auto-columns: 85%; gap: 16px; }
   .news-arrow { display: none; }   /* swipe on phones */
 }
+
+/* Profile pages: square photo with the email address underneath (no photo strip) */
+.profile-page .profile-body { padding-top: 40px; }
+.headshot {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 0;
+  margin: 0 auto 16px;
+}
+.profile-email {
+  display: block;
+  text-align: center;
+  font-size: 0.98rem;
+  color: var(--blue);
+  word-break: break-word;
+}
+.profile-email:hover { color: var(--orange); }
+.profile-email.todo { color: #a1a1a6; font-style: italic; }
+@media (max-width: 820px) {
+  .profile-side { max-width: 300px; margin: 0 auto; }
+}
+
+.profile-text .bio {
+  text-align: justify;
+  hyphens: auto;          /* splits long words at line ends so spacing stays even */
+  -webkit-hyphens: auto;
+}
+
+.profile-text .bio {
+  text-align: justify;
+  hyphens: auto;          /* splits long words at line ends so spacing stays even */
+  -webkit-hyphens: auto;
+}
+
+/* Former Group Members: initials in the circle until a photo is added */
+.person .photo.initials {
+  background: linear-gradient(135deg, #2b4b72, #213c5d);
+  color: #fff;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.person.alum .photo { width: 150px; height: 150px; }
+.person.alum .role { margin-bottom: 4px; }
+
+
+/* Former Group Members: 4 per row */
+.people.people-4 { grid-template-columns: repeat(4, 1fr); gap: 40px 24px; }
+.people-4 .person .edu { font-size: 0.88rem; }
+@media (max-width: 1000px) { .people.people-4 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px)  { .people.people-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 420px)  { .people.people-4 { grid-template-columns: 1fr; } }
+
+/* Former undergraduates: clean list (name | degree & year | organization) */
+.alum-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.alum-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 4px 24px;
+  align-items: baseline;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.alum-name { font-weight: 600; color: var(--ink); }
+.alum-year { color: var(--orange); font-weight: 600; font-size: 0.92rem; }
+.alum-org  { color: var(--muted); font-size: 0.95rem; }
+@media (max-width: 640px) {
+  .alum-list li { grid-template-columns: 1fr; gap: 2px; padding: 12px 2px; }
+}
