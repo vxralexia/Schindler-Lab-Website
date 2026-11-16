@@ -329,7 +329,7 @@ window.PUBLICATIONS = [
     "year": 2025,
     "volume": "",
     "pages": "",
-    "doi": "10.26434/chemrxiv-2025-6q0d0",
+    "doi": "10.26434/chemrxiv-2025-6q0d0/v2",
     "topics": [],
     "needs_review": true,
     "date": "2026-02-17",
