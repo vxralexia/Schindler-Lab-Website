@@ -934,3 +934,21 @@ html.lb-open { overflow: hidden; }
   .lb-prev { left: calc(50% - 52px); }
   .lb-next { right: calc(50% - 52px); }
 }
+
+/* ---------- Phones: people in rows of 2 (Group Members, Alumni, Staff) ---------- */
+@media (max-width: 560px) {
+  .people,
+  .people.people-4 { grid-template-columns: repeat(2, 1fr); gap: 28px 12px; }
+  .person .photo,
+  .person.alum .photo {
+    width: min(132px, 100%);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 10px;
+  }
+  .person .photo.initials { font-size: 2rem; }
+  a.person { padding: 4px; }
+  .person h3 { font-size: 0.95rem; line-height: 1.25; }
+  .person .role { font-size: 0.8rem; }
+  .person .edu { font-size: 0.75rem; line-height: 1.35; overflow-wrap: anywhere; }
+}
