@@ -12,8 +12,7 @@ window.LINKEDIN = {
   // Link for the "Follow on LinkedIn" button (the lab's or Corinna's LinkedIn page).
   "profile": "https://www.linkedin.com/in/corinna-schindler-1b192b104/",
   "posts": [
-    { "post": "https://lnkd.in/p/gDECXxMx"
-      "post": "https://lnkd.in/p/gSgdj7Dd"
-    }
+    { "post": "https://www.linkedin.com/feed/update/urn:li:activity:7422357150125019136/" },
+    { "post": "https://www.linkedin.com/posts/corinna-schindler-1b192b104_a-long-time-in-the-making-and-finally-out-share-7404264513476427776-z3LB/" }
   ]
 };
