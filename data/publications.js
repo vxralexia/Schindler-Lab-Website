@@ -119,6 +119,20 @@ window.PUBLICATIONS = [
     "number": 82
   },
   {
+    "title": "Translational Potential of New Academic Synthetic Transformations: Lessons from the Aza Paternò–Büchi Reaction",
+    "authors": "Illia S. Shpotia, Seren G. Parikh, Шам Вадим Андрійович, Dmytro M. Volochnyuk, Serhiy Ryabukhin, and Corinna S. Schindler",
+    "journal": "ChemRxiv",
+    "year": 2026,
+    "date": "2026-11-15",
+    "volume": "",
+    "pages": "",
+    "doi": "10.26434/chemrxiv.15012212/v1",
+    "topics": [
+      "photochemistry"
+    ],
+    "needs_review": true
+  },
+  {
     "title": "N-Phosphoryl Imines Enable Intermolecular Aza Paternò–Büchi Reactions with Unactivated and Activated Alkenes",
     "authors": "Scott L. Kim, Lillian J. Carleu, and Corinna S. Schindler",
     "journal": "ChemRxiv",
