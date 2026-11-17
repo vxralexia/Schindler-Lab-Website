@@ -953,47 +953,79 @@ html.lb-open { overflow: hidden; }
   .person .edu { font-size: 0.75rem; line-height: 1.35; overflow-wrap: anywhere; }
 }
 
-/* ---------- Homepage: "On LinkedIn" row of posts ---------- */
-.li-wrap { position: relative; }
-.li-posts {
+
+/* ---------- Homepage: "On LinkedIn" cards (clean, Apple-style) ---------- */
+.li-box { position: relative; }
+.li-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(300px, 380px);
-  gap: 20px;
+  grid-auto-columns: calc((100% - 56px) / 3);
+  gap: 28px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 6px 0 18px;
-  scrollbar-width: thin;
-  justify-content: start;
+  padding: 10px 2px 26px;
+  scrollbar-width: none;
 }
-.li-posts:has(.li-empty) { display: block; }
+.li-track::-webkit-scrollbar { display: none; }
+.li-track:has(.li-empty) { display: block; }
 .li-card {
   scroll-snap-align: start;
+  display: flex; flex-direction: column;
   background: #fff;
-  border: 1px solid #e3e7ee;
-  border-radius: 12px;
-  box-shadow: 0 2px 14px rgba(33, 60, 93, 0.08);
+  border-radius: 22px;
   overflow: hidden;
+  text-decoration: none !important;
+  color: #1d1d1f;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease;
 }
-.li-card iframe { display: block; width: 100%; height: 560px; border: 0; }
+.li-card:hover, .li-card:focus-visible {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+.li-thumb { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.li-thumb-plain {
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, #213c5d 0%, #34557d 100%);
+  color: rgba(255, 255, 255, 0.92);
+}
+.li-thumb-plain svg { width: 54px; height: 54px; }
+.li-body { display: flex; flex-direction: column; flex: 1; padding: 22px 24px 24px; }
+.li-meta {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em;
+  color: #6e6e73; margin-bottom: 10px;
+}
+.li-badge { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; background: #0a66c2; color: #fff; }
+.li-badge svg { width: 12px; height: 12px; }
+.li-date { font-weight: 400; }
+.li-text {
+  margin: 0 0 18px;
+  font-size: 1.02rem; line-height: 1.5; color: #1d1d1f;
+  display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;
+}
+.li-more { margin-top: auto; font-weight: 600; font-size: 0.95rem; color: var(--orange, #dc8642); }
+.li-card:hover .li-more { text-decoration: underline; }
 .li-empty {
-  text-align: center; color: #6b7280; margin: 0;
-  background: #fff; border: 1px solid #e3e7ee; border-radius: 12px;
-  padding: 40px 16px; max-width: 560px; margin: 0 auto;
+  text-align: center; color: #6e6e73; margin: 0 auto; max-width: 560px;
+  background: #fff; border-radius: 22px; padding: 40px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 .li-prev, .li-next {
-  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  position: absolute; top: 42%; z-index: 2;
   width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
-  background: var(--navy, #213c5d); color: #fff; font-size: 1.6rem; line-height: 1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: background 0.2s, opacity 0.2s;
+  background: rgba(255, 255, 255, 0.92); color: #1d1d1f; font-size: 1.6rem; line-height: 1;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.2s, transform 0.2s;
 }
-.li-prev { left: -22px; }
-.li-next { right: -22px; }
-.li-prev:hover, .li-next:hover { background: var(--orange, #dc8642); }
+.li-prev { left: -20px; }
+.li-next { right: -20px; }
+.li-prev:hover, .li-next:hover { transform: scale(1.08); }
 .li-prev:disabled, .li-next:disabled { opacity: 0; pointer-events: none; }
 .li-prev[hidden], .li-next[hidden] { display: none; }
+@media (max-width: 1000px) { .li-track { grid-auto-columns: calc((100% - 24px) / 2); gap: 24px; } }
 @media (max-width: 640px) {
-  .li-posts { grid-auto-columns: 86%; }
+  .li-track { grid-auto-columns: 85%; gap: 16px; }
   .li-prev, .li-next { display: none; }
 }
